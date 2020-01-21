@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { Context } from '../../context';
 import Spinner from '../layout/Spinner';
 import Track from '../tracks/Track';
+import FMTrack from '../tracks/FMTrack';
 
 const Tracks = () => {
   const [state] = useContext(Context);
@@ -14,9 +15,13 @@ const Tracks = () => {
       <>
         <h3 className="text-center mb-4">{heading}</h3>
         <div className="row">
-          {track_list.map(item => (
-            <Track key={item.track.track_id} track={item.track} />
-          ))}
+          {track_list[0].track !== undefined ?
+            track_list.map(item => (
+              <Track key={item.track.track_id} track={item.track} />
+            )) :
+            track_list.map((item, index) => (
+              <FMTrack key={index} track={item} />
+            ))}
         </div>
       </>
     );
